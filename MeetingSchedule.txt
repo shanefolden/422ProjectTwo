@@ -1,2 +1,8 @@
 Tuesdays + Thursdays at 3:30
 Sundays as needed
+
+Summary of 3/09 meeting
+- Create repo 
+- Discuss plan for completing SRS
+- Plan is to meet Friday 3/10 at ~3:15, and lay out the skeleton and get as much done as possible.
+- Regroup Sunday to finish SRS 
