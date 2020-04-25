@@ -20,6 +20,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
     
+    @IBOutlet weak var startHomeButton: UIButton!
+    @IBOutlet weak var stopHomeButton: UIButton!
+    
+    
     // Create var locationManager to be accessed by all functions in class
     var locationManager: CLLocationManager?
     
@@ -28,6 +32,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let timeFormatter = DateFormatter()
     let minFormatter = DateFormatter()
     let secFormatter = DateFormatter()
+    
+    // Create variable to detect if app has been launched on this device before
+    let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
+    
+    // creat variable to determine if user at home and data needs to be obfuscated
+    var atHome = false
 
     // When view loads, create titles for buttons, when start is available say start, after pressed indicate tracking.
     // When pressed calls tappedStart same for stop and tappedStop
@@ -38,12 +48,37 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // check if App has been launched before.
+        // If not, set lat offset to random number between .05 and .25 miles
+        if !launchedBefore{
+            // Equivelant of .05-.25 mi in latitude
+            var randomLat =  Double.random(in: 0.0007 ..< 0.0036)
+            //  Multiplier is var to determine if lat offset is added or subtracted
+            let multiplier = Bool.random()
+            if multiplier {
+                randomLat = randomLat * -1
+            }
+            // Adds latOffset to constant user values that way it doesnt change if the user quits the app
+            UserDefaults.standard.set(randomLat, forKey: "latOffset")
+        }
+        //start button setup
         startButton.setTitle("Start Button", for:.normal)
         startButton.setTitle("tracking...", for:.disabled)
         
         startButton.addTarget(self, action:#selector(self.tappedStart), for:.touchUpInside)
         
         stopButton.addTarget(self, action:#selector(self.tappedStop), for:.touchUpInside)
+        
+        //at home button setup
+        startHomeButton.setTitle("At home?", for:.normal)
+        startHomeButton.setTitle("Currently at home.", for:.disabled)
+        
+        stopHomeButton.setTitle("Not at home", for:.normal)
+        stopHomeButton.setTitle("Currently not at home.", for:.disabled)
+        
+        startHomeButton.addTarget(self, action:#selector(self.tappedStartHome), for:.touchUpInside)
+               
+        stopHomeButton.addTarget(self, action:#selector(self.tappedStopHome), for:.touchUpInside)
 
         // Location Setup
         locationManager = CLLocationManager()
@@ -83,6 +118,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         stopButton.isEnabled = false
         locationManager?.stopUpdatingLocation()
     }
+    
+    @objc func tappedStartHome(){
+        startHomeButton.isEnabled = false
+        stopHomeButton.isEnabled = true
+        atHome = true
+    }
+       // If stop is tapped, disable stop, enable start, and stop updatingLocation
+    @objc func tappedStopHome(){
+       startHomeButton.isEnabled = true
+       stopHomeButton.isEnabled = false
+       atHome = false
+   }
 
     // Every second the location is updated this function is called by LocationManager
     // locations stores the locations retrieved, and the most recent addition (index 0) is the current location
@@ -98,8 +145,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         var request : URLRequest = URLRequest(url: url!)
         request.httpMethod = "POST"
         // Create formatted vars of 4 decimal places, round value after multiplying by 10000 and then divide by 10000, will find source and post.
-        let locationLat = Double(round(10000*location.coordinate.latitude)/10000)
+        var locationLat = Double(round(10000*location.coordinate.latitude)/10000)
         let locationLong = Double(round(10000*location.coordinate.longitude)/10000)
+       
+        // If user pressed at home button
+        if(atHome) {
+            // get Stored lat offset val and add it to the current location latitude
+            let latAdder = UserDefaults.standard.double(forKey: "latOffset")
+            locationLat += latAdder
+            locationLat = Double(round(10000*locationLat)/10000)
+        }
         
         // Retrieve date
         let date = dateFormatter.string(from: location.timestamp)
