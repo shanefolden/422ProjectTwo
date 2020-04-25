@@ -14,7 +14,6 @@
 		EE2404BB244BC13800296022 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2404B9244BC13800296022 /* Main.storyboard */; };
 		EE2404BD244BC13D00296022 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE2404BC244BC13D00296022 /* Assets.xcassets */; };
 		EE2404C0244BC13D00296022 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2404BE244BC13D00296022 /* LaunchScreen.storyboard */; };
-		EE2404CB244BC13D00296022 /* LocationBaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2404CA244BC13D00296022 /* LocationBaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +37,6 @@
 		EE2404BF244BC13D00296022 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE2404C1244BC13D00296022 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE2404C6244BC13D00296022 /* LocationBaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocationBaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		EE2404CA244BC13D00296022 /* LocationBaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationBaseTests.swift; sourceTree = "<group>"; };
-		EE2404CC244BC13D00296022 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +61,6 @@
 			isa = PBXGroup;
 			children = (
 				EE2404B2244BC13800296022 /* LocationBase */,
-				EE2404C9244BC13D00296022 /* LocationBaseTests */,
 				EE2404B1244BC13800296022 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,15 +87,6 @@
 				34CE425C244F807900926D34 /* logo.png */,
 			);
 			path = LocationBase;
-			sourceTree = "<group>";
-		};
-		EE2404C9244BC13D00296022 /* LocationBaseTests */ = {
-			isa = PBXGroup;
-			children = (
-				EE2404CA244BC13D00296022 /* LocationBaseTests.swift */,
-				EE2404CC244BC13D00296022 /* Info.plist */,
-			);
-			path = LocationBaseTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,7 +201,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EE2404CB244BC13D00296022 /* LocationBaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
