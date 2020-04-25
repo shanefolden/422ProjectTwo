@@ -83,8 +83,8 @@
 			children = (
 				EE2404B3244BC13800296022 /* AppDelegate.swift */,
 				EE2404B5244BC13800296022 /* SceneDelegate.swift */,
-				EE2404B7244BC13800296022 /* ViewController.swift */,
 				EE2404B9244BC13800296022 /* Main.storyboard */,
+				EE2404B7244BC13800296022 /* ViewController.swift */,
 				EE2404BC244BC13D00296022 /* Assets.xcassets */,
 				EE2404BE244BC13D00296022 /* LaunchScreen.storyboard */,
 				EE2404C1244BC13D00296022 /* Info.plist */,

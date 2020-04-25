@@ -23,6 +23,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var startHomeButton: UIButton!
     @IBOutlet weak var stopHomeButton: UIButton!
     
+    @IBOutlet weak var trackingSpinner: UIActivityIndicatorView!
     
     // Create var locationManager to be accessed by all functions in class
     var locationManager: CLLocationManager?
@@ -50,6 +51,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         // check if App has been launched before.
         // If not, set lat offset to random number between .05 and .25 miles
+        trackingSpinner.stopAnimating()
         if !launchedBefore{
             // Equivelant of .05-.25 mi in latitude
             var randomLat =  Double.random(in: 0.0007 ..< 0.0036)
@@ -61,7 +63,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             // Adds latOffset to constant user values that way it doesnt change if the user quits the app
             UserDefaults.standard.set(randomLat, forKey: "latOffset")
         }
-        //start button setup
+        // start/stop button setup
         startButton.setTitle("Start Button", for:.normal)
         startButton.setTitle("tracking...", for:.disabled)
         
@@ -71,10 +73,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         //at home button setup
         startHomeButton.setTitle("At home?", for:.normal)
-        startHomeButton.setTitle("Currently at home.", for:.disabled)
+        startHomeButton.setTitle("Currently: home.", for:.disabled)
         
         stopHomeButton.setTitle("Not at home", for:.normal)
-        stopHomeButton.setTitle("Currently not at home.", for:.disabled)
+        stopHomeButton.setTitle("Currently: not home.", for:.disabled)
         
         startHomeButton.addTarget(self, action:#selector(self.tappedStartHome), for:.touchUpInside)
                
@@ -89,7 +91,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         // Date Formatting
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        dateFormatter.timeStyle = .none
         // Time Formatting
         timeFormatter.dateStyle = .none
         timeFormatter.dateFormat = "HH:mm:ss"
@@ -105,18 +106,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     // Button selector must indicate objective c, therefore declare function in objectiveC (Nice work Siqi)!!!!
     // Once tapped, disable start/enable stop, and startupdating location. Added same location vals to ensure that background runs, may be redundant
+    // Spin if on, if off spinner doesnt show
     @objc func tappedStart(){
         startButton.isEnabled = false
         stopButton.isEnabled = true
         locationManager?.startUpdatingLocation()
         locationManager!.allowsBackgroundLocationUpdates = true
         locationManager!.pausesLocationUpdatesAutomatically = false
+        trackingSpinner.startAnimating()
     }
     // If stop is tapped, disable stop, enable start, and stop updatingLocation
     @objc func tappedStop(){
         startButton.isEnabled = true
         stopButton.isEnabled = false
         locationManager?.stopUpdatingLocation()
+        trackingSpinner.stopAnimating()
     }
     
     @objc func tappedStartHome(){
@@ -141,6 +145,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // POST Setup
         // Create URLString to db upload page
         let url = URL(string: "https://ix.cs.uoregon.edu/~masonj/422backend.php")
+
         // Create a URLRequest variable and give it address url, method of POST as it send data in body
         var request : URLRequest = URLRequest(url: url!)
         request.httpMethod = "POST"
@@ -171,7 +176,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             let postData = "userId=\(UIDevice.current.identifierForVendor?.uuidString ?? "001")&tDate=\(date)&tTime=\(time)&tLatitude=\(locationLat)&tLongitude=\(locationLong)"
             
             // To test code without posting data to db that is down comment from here
-            /*
+            
             request.httpBody = postData.data(using: String.Encoding.utf8)
 
             let dataTask = URLSession.shared.dataTask(with: request) { data,response,error in
@@ -185,12 +190,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             }
             dataTask.resume()
             // End block comment here to test without posting
-            */
+            
             // print rather than post for testing purposes, remove if posting to db
-            print(postData)
+            //print(postData)
 
         } else { // If not 5 min and 0 sec then do this
-            print("working")
+            //print("working")
         }
         }
         
