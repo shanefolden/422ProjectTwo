@@ -73,6 +73,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         stopHomeButton.setTitle("Not at home", for:.normal)
         stopHomeButton.setTitle("Currently: not home.", for:.disabled)
         stopHomeButton.addTarget(self, action:#selector(self.tappedStopHome), for:.touchUpInside)
+
+        
+        // Add border for buttons
+        startHomeButton.layer.borderWidth = 1
+        startHomeButton.layer.borderColor = UIColor.black.cgColor
+        startHomeButton.layer.cornerRadius = 5
+        
+        stopHomeButton.layer.borderWidth = 1
+        stopHomeButton.layer.borderColor = UIColor.black.cgColor
+        stopHomeButton.layer.cornerRadius = 5
+
+        startButton.layer.borderWidth = 1
+        startButton.layer.borderColor = UIColor.black.cgColor
+        startButton.layer.cornerRadius = 5
+        
+        stopButton.layer.borderWidth = 1
+        stopButton.layer.borderColor = UIColor.black.cgColor
+        stopButton.layer.cornerRadius = 5
+
         // Location Manager initialization, delegates calls to self
         // Requests authorization, response on change sent to func with didChangeAuthorization
         // Persists tracking when app is in the background
