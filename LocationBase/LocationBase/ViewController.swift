@@ -5,7 +5,7 @@
 //  Created by Irfan Filipovic on 4/18/20.
 //  Modified by Irfan Filipovic, Shane Folden, Siqi Wang
 
-//  Last modified by: IF
+//  Last modified by: SF
 //  Last modified on: 04/26/20
 
 //  Following code operates tracking location and posting to the database.
@@ -41,6 +41,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     //    7. Implement own functions on view load
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor=UIColor.init(red: 199/255, green: 213/255, blue: 159/255, alpha: 1)
         // Ensure spinner disabled
         trackingSpinner.stopAnimating()
         // Check if app has been launched before.
@@ -91,6 +92,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         stopButton.layer.borderWidth = 1
         stopButton.layer.borderColor = UIColor.black.cgColor
         stopButton.layer.cornerRadius = 5
+        
+        // Add background color for buttons, add color of text
+        // Start buttons are blue, stop buttons are red
+        startButton.backgroundColor = UIColor(red: 0/255, green: 123/255, blue: 255/255, alpha: 1)
+        startButton.setTitleColor(.white, for: .normal)
+        
+        stopButton.backgroundColor = UIColor(red: 255/255, green: 82/255, blue: 82/255, alpha: 1)
+        stopButton.setTitleColor(.white, for: .normal)
+        
+        startHomeButton.backgroundColor = UIColor(red: 0/255, green: 123/255, blue: 255/255, alpha: 1)
+        startHomeButton.setTitleColor(.white, for: .normal)
+        
+        stopHomeButton.backgroundColor = UIColor(red: 255/255, green: 82/255, blue: 82/255, alpha: 1)
+        stopHomeButton.setTitleColor(.white, for: .normal)
+        
+        // Disable Stop button and not at home button
+        // Since this is the default state they cannot be pressed until
+        // the user pressed the start button or the at home button
+        // The alpha value changes the brightness of the background color
+        stopButton.isEnabled = false
+        stopButton.alpha = 0.5
+        stopHomeButton.isEnabled = false
+        stopHomeButton.alpha = 0.5
+        
 
         // Location Manager initialization, delegates calls to self
         // Requests authorization, response on change sent to func with didChangeAuthorization
@@ -119,7 +144,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     // Added same location vals to ensure that background runs, may be redundant but no error.
     @objc func tappedStart(){
         startButton.isEnabled = false
+        startButton.alpha  = 0.5;
         stopButton.isEnabled = true
+        stopButton.alpha  = 1.0;
         locationManager?.startUpdatingLocation()
         locationManager!.allowsBackgroundLocationUpdates = true
         locationManager!.pausesLocationUpdatesAutomatically = false
@@ -128,21 +155,27 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     // If stop is tapped, disable stop | enable start | stop spinner, and stop updating location.
     @objc func tappedStop(){
         startButton.isEnabled = true
+        startButton.alpha  = 1.0;
         stopButton.isEnabled = false
+        stopButton.alpha  = 0.5;
         locationManager?.stopUpdatingLocation()
         trackingSpinner.stopAnimating()
     }
     // If start is tapped, disable start | enable stop, and set atHome true.
     @objc func tappedStartHome(){
         startHomeButton.isEnabled = false
+        startHomeButton.alpha = 0.5
+        stopHomeButton.alpha = 1.0
         stopHomeButton.isEnabled = true
         atHome = true
     }
     // If stop is tapped, disable stop | enable start, and set atHome false.
     @objc func tappedStopHome(){
-       startHomeButton.isEnabled = true
-       stopHomeButton.isEnabled = false
-       atHome = false
+        startHomeButton.isEnabled = true
+        stopHomeButton.isEnabled = false
+        stopHomeButton.alpha = 0.5
+        startHomeButton.alpha = 1.0
+        atHome = false
    }
 
     // locations stores the locations retrieved, and the most recent addition (index 0) is the current location
@@ -189,8 +222,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     print("Error occured \(error)")
                     return
                 }
-                if let data = data, let dataString = String(data: data, encoding: .utf8) {
-                    //print("Reponse data string:\n\(dataString)")
+                if let data = data, let _ = String(data: data, encoding: .utf8) {
+                    //print("Reponse data string:\n\(_)")
                 }
             }
             dataTask.resume()
