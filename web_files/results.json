@@ -1,0 +1,24 @@
+{
+        "type": "FeatureCollection",
+        "features": [
+             {"type": "Feature",
+        "geometry": {
+                "type": "Point",
+              "coordinates": [-123.0789, 44.0366]
+            },
+            "properties": {
+                 "Identity":"78CE94B3-24CA-4403-93D9-94E54AE5C0D0",
+                 "Date":"2020-04-27",
+                 "Time":"20:40:00",
+                 "Time_at_Location":"0"
+         }},   {"type": "Feature",
+        "geometry": {
+                "type": "Point",
+              "coordinates": [-117.2143, 32.8635]
+            },
+            "properties": {
+                 "Identity":"D3EEC7A8-BD15-495C-8EA7-7B93994BAC18",
+                 "Date":"2020-04-27",
+                 "Time":"20:40:00",
+                 "Time_at_Location":"0"
+         }},{}]}

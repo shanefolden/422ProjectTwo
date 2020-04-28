@@ -1,0 +1,30 @@
+/*
+ *
+ * GROUP 5 - PROJECT 1 MAP HOST CSS
+ * 		THIS CSS FILE IS USED ON 422map.html
+ * Created: 4/24/20
+ * Last Modified: 4/24/20
+ * Authors: Mason Jones (MJ)
+ *
+ */
+
+body {
+	background-color: #248232;
+	margin: 0px;
+	font-family: 'Lato', sans-serif;
+}
+
+.main_body {
+        background-color: #C7D59F;
+        margin: 0px;
+}
+
+.marker {
+	position: fixed !important;
+}
+
+#map {
+	position: absolute !important;
+	height: 800px;
+	width: 100%;
+}

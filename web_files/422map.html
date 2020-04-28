@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<!--
+GROUP 5 - PROJECT 1 MAP HOSTING PAGE
+THIS PAGE IS A HOST FOR THE MAPBOX MAP - IT IS USED IN AN IFRAME CALL ON THE MAIN PAGE, 422Project1.html
+Created: 4/24/20
+Last Modified: 4/27/20
+Authors: Man Him Fung (MF), Mason Jones (MJ), Siqi Wang (SW)
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css' rel='stylesheet'/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+	<script type="text/javascript">
+		function uploadGJ() {
+			var xhttp = new XMLHttpRequest();
+			xhttp.open("POST", "results.json", false);
+			xhttp.onload = function() {
+				if (xhttp.status == 200) {
+					document.getElementById('json_area').innerHTML = xhttp.responseText;
+					console.log(xhttp.responseText);
+					//alert('good job');
+				}
+			};
+			xhttp.send();
+		}
+	</script>
+
+        <title>Group 5 - CIS 422 Project 1</title>
+        <link href="test422style.css" rel="stylesheet"/>
+</head>
+
+<!--BODY STARTS HERE-->
+<body>
+	<div id="json_area" style="display:none;"></div>
+        <div id='map' class='mapboxgl-map'></div>  
+
+	<!-- INIT MAP -->
+	<script async type="text/javascript">
+	mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uZXNtMCIsImEiOiJjazlldHBxaWUwNjE5M2Vub2d3czA0MnFyIn0.8p_wa6e2LPsQMG6MdKv61Q'
+	var map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/jonesm0/ck9ety752067t1ipbe57x31lm'
+	});
+	
+	//PUT DIV HERE
+	//$("body").html('<div id="json_area" style="display:none;"></div>');
+	
+	uploadGJ();
+
+	var geojson = document.getElementById('json_area').innerHTML;
+	//alert(geojson);
+	var newnew = JSON.parse(geojson);
+	//newnew = JSON.stringify(eval("(" + geojson + ")"));
+	newnew.features.forEach(function(marker) {
+		var uno = document.createElement('div');
+			uno.className = 'marker';
+			uno.style.backgroundImage = 'url(https://ix.cs.uoregon.edu/~masonj/geos/blip_duck_mini.png)';
+			uno.style.width = '35px';
+			uno.style.height = '35px';
+				
+			console.log(uno.className);
+
+			new mapboxgl.Marker(uno)
+				.setLngLat(marker.geometry.coordinates)
+			.setPopup(new mapboxgl.Popup({offset: 25}).setHTML('<h3>ID: ' + marker.properties.Identity + '</h3><p>Date: ' + marker.properties.Date + '</p><p>Time: ' + marker.properties.Time + '</p><p>Time at Location: ' + marker.properties.Time_at_Location + '</p>'))
+				//.setPitchAlignment('map')
+				//.setRotationAlignment('map')
+				.addTo(map);
+	});
+	</script>
+	<!--script type="text/javascript">
+
+
+
+	//var d1 = document.getElementById('json_area');
+	//d1.insertAdjacentHTML('afterbegin', JSON.stringify(geojson));
+        </script-->
+</body>
+</html>
+
