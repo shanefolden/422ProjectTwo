@@ -8,6 +8,9 @@ or die('Error connecting to MySQL server.');
 
 <!--
 GROUP 5 - PROJECT 1 BACKEND PHP PAGE
+THIS PAGE INPUTS LOCATION DATA INTO THE DATABASE
+IT ALSO RUNS A QUERY TO DETERMINE THE MOST RECENT LOCATION UPDATES PER DISTINCT USER
+THIS PAGE ALSO OUTPUTS A TAB-DELIMITED TEXT FILE
 Created: 4/19/20
 Last Modified: 4/27/20
 Authors: Secondary:Man Him Fung (MF), Primary:Mason Jones (MJ)	
@@ -79,10 +82,22 @@ $dbdata = array();
   fwrite($fp, "{}]}");
 
   fclose($fp);
+  
+?>
 
+<?php
+  $result3 = $conn->query("SELECT * FROM Geospatial_Data ORDER BY Date DESC, TIME DESC ");
+
+  $fp2 = fopen('Query_result.txt','w');
+  while($row2 = $result3->fetch_assoc()){
+  fwrite($fp2,"$row2[Identity]\t$row2[Date]\t$row2[Time]\t$row2[Latitude]\t$row2[Longitude]\t$row2[Time_at_Location]\n" );
+  fwrite($fp2, "");
+}
+  fclose($fp2);
 
 mysqli_free_result($result1);
 mysqli_free_result($result2);
+mysqli_free_result($result3);
 
 mysqli_close($conn);
 
