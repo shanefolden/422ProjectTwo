@@ -12,7 +12,6 @@
 		EE2404B6244BC13800296022 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2404B5244BC13800296022 /* SceneDelegate.swift */; };
 		EE2404B8244BC13800296022 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2404B7244BC13800296022 /* ViewController.swift */; };
 		EE2404BB244BC13800296022 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2404B9244BC13800296022 /* Main.storyboard */; };
-		EE2404BD244BC13D00296022 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE2404BC244BC13D00296022 /* Assets.xcassets */; };
 		EE2404C0244BC13D00296022 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE2404BE244BC13D00296022 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -33,7 +32,6 @@
 		EE2404B5244BC13800296022 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		EE2404B7244BC13800296022 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EE2404BA244BC13800296022 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		EE2404BC244BC13D00296022 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EE2404BF244BC13D00296022 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EE2404C1244BC13D00296022 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE2404C6244BC13D00296022 /* LocationBaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocationBaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,7 +79,6 @@
 				EE2404B5244BC13800296022 /* SceneDelegate.swift */,
 				EE2404B9244BC13800296022 /* Main.storyboard */,
 				EE2404B7244BC13800296022 /* ViewController.swift */,
-				EE2404BC244BC13D00296022 /* Assets.xcassets */,
 				EE2404BE244BC13D00296022 /* LaunchScreen.storyboard */,
 				EE2404C1244BC13D00296022 /* Info.plist */,
 				34CE425C244F807900926D34 /* logo.png */,
@@ -172,7 +169,6 @@
 			files = (
 				34CE425D244F807900926D34 /* logo.png in Resources */,
 				EE2404C0244BC13D00296022 /* LaunchScreen.storyboard in Resources */,
-				EE2404BD244BC13D00296022 /* Assets.xcassets in Resources */,
 				EE2404BB244BC13800296022 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
