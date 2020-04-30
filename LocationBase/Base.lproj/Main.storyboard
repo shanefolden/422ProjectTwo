@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LocationBase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CIS 422: Project 1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mNq-dO-bwd">
+                                <rect key="frame" x="119" y="58" width="147" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="gEO-Sv-eAj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bth-YH-IP7">
+                                <rect key="frame" x="68" y="347" width="120" height="30"/>
+                                <state key="normal" title="Start Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XbV-jK-AJJ">
+                                <rect key="frame" x="209" y="347" width="108" height="30"/>
+                                <state key="normal" title="Stop Button"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Yl-eF-f4L">
+                                <rect key="frame" x="103" y="485" width="207" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="207" id="h7P-BN-JXi"/>
+                                    <constraint firstAttribute="height" constant="60" id="zHD-Hd-naG"/>
+                                </constraints>
+                                <state key="normal" title="At home?"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJ5-z0-hVH">
+                                <rect key="frame" x="103" y="606" width="207" height="60"/>
+                                <state key="normal" title="Not at Home"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bc4-Jg-h7R">
+                                <rect key="frame" x="68" y="108" width="249" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="hzd-T1-mjG">
+                                <rect key="frame" x="182" y="400" width="21" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="49.999999999999943" id="AXx-jv-iQL"/>
+                                </constraints>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assistance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="274" translatesAutoresizingMaskIntoConstraints="NO" id="0LW-IA-4HX">
+                                <rect key="frame" x="68" y="146" width="249" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Bc4-Jg-h7R" firstAttribute="trailing" secondItem="0LW-IA-4HX" secondAttribute="trailing" id="1zV-bR-HIr"/>
+                            <constraint firstItem="kJ5-z0-hVH" firstAttribute="leading" secondItem="7Yl-eF-f4L" secondAttribute="leading" id="5al-cg-wkS"/>
+                            <constraint firstItem="Bth-YH-IP7" firstAttribute="width" secondItem="XbV-jK-AJJ" secondAttribute="width" multiplier="1.11111" id="CAk-Pd-6Oo"/>
+                            <constraint firstItem="0LW-IA-4HX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CcD-3a-9X3"/>
+                            <constraint firstItem="kJ5-z0-hVH" firstAttribute="trailing" secondItem="7Yl-eF-f4L" secondAttribute="trailing" id="Cnw-Ck-2M6"/>
+                            <constraint firstItem="Bc4-Jg-h7R" firstAttribute="top" secondItem="mNq-dO-bwd" secondAttribute="bottom" constant="19" id="D58-1l-muG"/>
+                            <constraint firstItem="kJ5-z0-hVH" firstAttribute="height" secondItem="7Yl-eF-f4L" secondAttribute="height" id="Ebv-8F-ia5"/>
+                            <constraint firstItem="kJ5-z0-hVH" firstAttribute="top" secondItem="7Yl-eF-f4L" secondAttribute="bottom" constant="61" id="Jcx-tC-3Mw"/>
+                            <constraint firstItem="Bth-YH-IP7" firstAttribute="baseline" secondItem="XbV-jK-AJJ" secondAttribute="baseline" id="LFC-zx-huq"/>
+                            <constraint firstItem="kJ5-z0-hVH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="103" id="QjV-Fq-EUt"/>
+                            <constraint firstItem="Bc4-Jg-h7R" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="U27-N5-u1Z"/>
+                            <constraint firstItem="Bc4-Jg-h7R" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="68" id="WVx-Hg-BeW"/>
+                            <constraint firstItem="0LW-IA-4HX" firstAttribute="centerX" secondItem="hzd-T1-mjG" secondAttribute="centerX" id="Y5E-ny-Dlk"/>
+                            <constraint firstItem="7Yl-eF-f4L" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="103" id="a3V-Hl-aIO"/>
+                            <constraint firstItem="kJ5-z0-hVH" firstAttribute="width" secondItem="7Yl-eF-f4L" secondAttribute="width" id="bNq-ja-y2a"/>
+                            <constraint firstItem="hzd-T1-mjG" firstAttribute="top" secondItem="XbV-jK-AJJ" secondAttribute="bottom" constant="23" id="cDS-wf-JjJ"/>
+                            <constraint firstItem="0LW-IA-4HX" firstAttribute="top" secondItem="Bc4-Jg-h7R" secondAttribute="bottom" constant="8" id="csN-YM-U6h"/>
+                            <constraint firstItem="Bc4-Jg-h7R" firstAttribute="leading" secondItem="0LW-IA-4HX" secondAttribute="leading" id="dER-Kd-qyG"/>
+                            <constraint firstItem="mNq-dO-bwd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="119" id="dr3-Zc-IrI"/>
+                            <constraint firstItem="XbV-jK-AJJ" firstAttribute="leading" secondItem="Bth-YH-IP7" secondAttribute="trailing" constant="21" id="fKA-jT-Adl"/>
+                            <constraint firstItem="mNq-dO-bwd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="58" id="k1Z-zB-ap9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kJ5-z0-hVH" secondAttribute="trailing" constant="104" id="knp-7k-eGY"/>
+                            <constraint firstItem="hzd-T1-mjG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="181.97142857142887" id="lOk-Qj-6rm"/>
+                            <constraint firstItem="7Yl-eF-f4L" firstAttribute="top" secondItem="hzd-T1-mjG" secondAttribute="bottom" constant="35" id="nJu-lF-Xxz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kJ5-z0-hVH" secondAttribute="bottom" constant="70" id="ncq-Oo-cHD"/>
+                            <constraint firstItem="Bth-YH-IP7" firstAttribute="height" secondItem="XbV-jK-AJJ" secondAttribute="height" id="oJE-wA-u5r"/>
+                            <constraint firstItem="mNq-dO-bwd" firstAttribute="centerX" secondItem="Bc4-Jg-h7R" secondAttribute="centerX" id="op6-z5-zgk"/>
+                            <constraint firstItem="kJ5-z0-hVH" firstAttribute="centerX" secondItem="hzd-T1-mjG" secondAttribute="centerX" constant="14" id="rPf-0M-YhU"/>
+                            <constraint firstItem="0LW-IA-4HX" firstAttribute="trailing" secondItem="XbV-jK-AJJ" secondAttribute="trailing" id="sDd-Tf-fq7"/>
+                            <constraint firstItem="mNq-dO-bwd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vRW-Hp-Fec"/>
+                            <constraint firstItem="Bth-YH-IP7" firstAttribute="leading" secondItem="0LW-IA-4HX" secondAttribute="leading" id="ybZ-Eo-s5U"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="startButton" destination="Bth-YH-IP7" id="4cJ-FI-pXC"/>
+                        <outlet property="startHomeButton" destination="7Yl-eF-f4L" id="1B5-Ph-guW"/>
+                        <outlet property="stopButton" destination="XbV-jK-AJJ" id="x6f-S1-UBB"/>
+                        <outlet property="stopHomeButton" destination="kJ5-z0-hVH" id="fGI-Bl-Q2c"/>
+                        <outlet property="trackingSpinner" destination="hzd-T1-mjG" id="5LM-1x-KDw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="122.28260869565219"/>
+        </scene>
+    </scenes>
+</document>
