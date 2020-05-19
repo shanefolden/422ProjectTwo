@@ -37,8 +37,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
     //    6. Variable to determine if user at home and data needs to be obfuscated
     var atHome = false
+    //    7. Variable to determine if first ping should be sent, i.e on start
+    var firstPing = false
+    //    8. Variables for previous long. and lat.
+    var prevLong = 0.0
+    var prevLat = 0.0
+    //    9. time at location variable and range for location (.025 miles)
+    var timeAtLocation = 0
+    var sameLocationCheck = 0.00035
 
-    //    7. Implement own functions on view load
+    //    10. Implement own functions on view load
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor=UIColor.init(red: 199/255, green: 213/255, blue: 159/255, alpha: 1)
@@ -147,6 +155,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         startButton.alpha  = 0.5;
         stopButton.isEnabled = true
         stopButton.alpha  = 1.0;
+        firstPing = true
         locationManager?.startUpdatingLocation()
         locationManager!.allowsBackgroundLocationUpdates = true
         locationManager!.pausesLocationUpdatesAutomatically = false
@@ -189,7 +198,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let secCheck = Int(secFormatter.string(from: location.timestamp))
         // If the minutes is a multiple of 5 and it is the first second of that minute
         // Post data, else do nothing
-        if((minCheck! % 5 == 0) && (secCheck! == 00)) {
+        if(((minCheck! % 5 == 0) && (secCheck! == 00)) || firstPing) {
+            firstPing = false
             // POST Setup
             // Create URLString to database upload page
             let url = URL(string: "https://ix.cs.uoregon.edu/~masonj/422backend.php")
@@ -208,12 +218,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 locationLat += latAdder
                 locationLat = Double(round(10000*locationLat)/10000)
             }
+            // Check curr location if same as last or within 0.025 miles
+            if(abs(locationLong - prevLong)<=sameLocationCheck && abs(locationLat - prevLat)<=sameLocationCheck) {
+                timeAtLocation += 5
+            } else {
+                timeAtLocation = 0
+            }
+            // Set curr values as previous
+            prevLong = locationLong
+            prevLat = locationLat
             // Retrieve date
             let date = dateFormatter.string(from: location.timestamp)
             // Retrieve time
             let time = timeFormatter.string(from: location.timestamp)
             // Create string that contains UIDevice ID which is unique for each device, and insert vars generated above
-            let postData = "userId=\(UIDevice.current.identifierForVendor?.uuidString ?? "001")&tDate=\(date)&tTime=\(time)&tLatitude=\(locationLat)&tLongitude=\(locationLong)"
+            let postData = "userId=\(UIDevice.current.identifierForVendor?.uuidString ?? "001")&tDate=\(date)&tTime=\(time)&tLatitude=\(locationLat)&tLongitude=\(locationLong)&tTimeAtLocation=\(timeAtLocation)"
             // Insert the data string into the request body data
             request.httpBody = postData.data(using: String.Encoding.utf8)
             // Start a session which transmits our data through a shared.dataTask()
