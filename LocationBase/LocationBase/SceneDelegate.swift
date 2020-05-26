@@ -16,13 +16,15 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    
+    @available(iOS 13.0, *)
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Loads Main.storyboard, on load ViewController.swift functions are invoked
         
         guard let _ = (scene as? UIWindowScene) else { return }
     }
-
+    
+    @available(iOS 13.0, *)
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Reload ViewController to continue location tracking
         //  1. Raises error as there is no background task to terminate
