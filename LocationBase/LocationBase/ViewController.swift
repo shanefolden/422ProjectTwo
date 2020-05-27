@@ -20,11 +20,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     //  Class creates:
     //    1. A spinner and button variables connected to placed objects on Main.storyboard
     //MARK: Properties
-    @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var stopButton: UIButton!
-    @IBOutlet weak var startHomeButton: UIButton!
-    @IBOutlet weak var stopHomeButton: UIButton!
-    @IBOutlet weak var trackingSpinner: UIActivityIndicatorView!
+
+    @IBOutlet weak var dataCollectionSwitch: UISwitch!
+    @IBOutlet weak var atHomeSwitch: UISwitch!
+    
+    @IBOutlet weak var trackingGif: UIImageView!
+    
+    @IBOutlet weak var trackLabel: UILabel!
+    
+
+    
     //    2. A Location Manager which uses Apple's standard location services
     var locationManager: CLLocationManager?
     //    3. Two formatters for posting data into the database, date and time.
@@ -52,8 +57,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor=UIColor.init(red: 199/255, green: 213/255, blue: 159/255, alpha: 1)
-        // Ensure spinner disabled
-        trackingSpinner.stopAnimating()
+        
+        // Initalize method for data collection switch to call
+        dataCollectionSwitch.addTarget(self, action: #selector(stateChanged), for: .valueChanged)
+        atHomeSwitch.addTarget(self, action: #selector(homeChanged), for: .valueChanged)
+        
+        
+        
+     
+        trackingGif.loadGif(name: "currentlyTracking")
+        trackingGif.isHidden = true
         // Check if app has been launched before.
         // If not, set lat offset vraiable to random number between .05 and .25 miles
         if !launchedBefore{
@@ -66,67 +79,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             }
             // Adds latOffset to constant user values that way it doesnt change if the user quits the app
             UserDefaults.standard.set(randomLat, forKey: "latOffset")
+            // Set switches to off state
+            dataCollectionSwitch.setOn(false, animated:false)
+            atHomeSwitch.setOn(false, animated:false)
         }
-        // Start button title switches on status.
-        // Call to objective c func tappedStart on touch.
-        startButton.setTitle("Start Button", for:.normal)
-        startButton.setTitle("tracking...", for:.disabled)
-        startButton.addTarget(self, action:#selector(self.tappedStart), for:.touchUpInside)
-        // Call to objective c func tappedStart on touch.
-        stopButton.addTarget(self, action:#selector(self.tappedStop), for:.touchUpInside)
-        // At home button title switches on status.
-        // Call to objective c func tappedStartHome on touch.
-        startHomeButton.setTitle("At home?", for:.normal)
-        startHomeButton.setTitle("Currently: home.", for:.disabled)
-        startHomeButton.addTarget(self, action:#selector(self.tappedStartHome), for:.touchUpInside)
-        // Not at home button title switches on status.
-        // Call to objective c func tappedStopHome on touch.
-        stopHomeButton.setTitle("Not at home", for:.normal)
-        stopHomeButton.setTitle("Currently: not home.", for:.disabled)
-        stopHomeButton.addTarget(self, action:#selector(self.tappedStopHome), for:.touchUpInside)
-
-        
-        // Add border for buttons
-        startHomeButton.layer.borderWidth = 1
-        startHomeButton.layer.borderColor = UIColor.black.cgColor
-        startHomeButton.layer.cornerRadius = 5
-        
-        stopHomeButton.layer.borderWidth = 1
-        stopHomeButton.layer.borderColor = UIColor.black.cgColor
-        stopHomeButton.layer.cornerRadius = 5
-
-        startButton.layer.borderWidth = 1
-        startButton.layer.borderColor = UIColor.black.cgColor
-        startButton.layer.cornerRadius = 5
-        
-        stopButton.layer.borderWidth = 1
-        stopButton.layer.borderColor = UIColor.black.cgColor
-        stopButton.layer.cornerRadius = 5
-        
-        // Add background color for buttons, add color of text
-        // Start buttons are blue, stop buttons are red
-        startButton.backgroundColor = UIColor(red: 0/255, green: 123/255, blue: 255/255, alpha: 1)
-        startButton.setTitleColor(.white, for: .normal)
-        
-        stopButton.backgroundColor = UIColor(red: 255/255, green: 82/255, blue: 82/255, alpha: 1)
-        stopButton.setTitleColor(.white, for: .normal)
-        
-        startHomeButton.backgroundColor = UIColor(red: 0/255, green: 123/255, blue: 255/255, alpha: 1)
-        startHomeButton.setTitleColor(.white, for: .normal)
-        
-        stopHomeButton.backgroundColor = UIColor(red: 255/255, green: 82/255, blue: 82/255, alpha: 1)
-        stopHomeButton.setTitleColor(.white, for: .normal)
-        
-        // Disable Stop button and not at home button
-        // Since this is the default state they cannot be pressed until
-        // the user pressed the start button or the at home button
-        // The alpha value changes the brightness of the background color
-        stopButton.isEnabled = false
-        stopButton.alpha = 0.5
-        stopHomeButton.isEnabled = false
-        stopHomeButton.alpha = 0.5
-        
-
+    
         // Location Manager initialization, delegates calls to self
         // Requests authorization, response on change sent to func with didChangeAuthorization
         // Persists tracking when app is in the background
@@ -152,50 +109,50 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     // Button selector must indicate objective c, therefore override
     // Once tapped, disable start | enable stop | enable spinner, and start updating location.
     // Added same location vals to ensure that background runs, may be redundant but no error.
-    @objc func tappedStart(){
-        startButton.isEnabled = false
-        startButton.alpha  = 0.5;
-        stopButton.isEnabled = true
-        stopButton.alpha  = 1.0;
-        firstPing = true
-        locationManager?.startUpdatingLocation()
-        locationManager!.allowsBackgroundLocationUpdates = true
-        locationManager!.pausesLocationUpdatesAutomatically = false
-        trackingSpinner.startAnimating()
-    }
+  
     // If stop is tapped, disable stop | enable start | stop spinner, and stop updating location.
-    @objc func tappedStop(){
-        startButton.isEnabled = true
-        startButton.alpha  = 1.0;
-        stopButton.isEnabled = false
-        stopButton.alpha  = 0.5;
-        locationManager?.stopUpdatingLocation()
-        trackingSpinner.stopAnimating()
-        timeAtLocation = 0
-        prevLat = 0.0
-        prevLong = 0.0
-        prevMin = 0
-    }
+ 
     // If start is tapped, disable start | enable stop, and set atHome true.
-    @objc func tappedStartHome(){
-        startHomeButton.isEnabled = false
-        startHomeButton.alpha = 0.5
-        stopHomeButton.alpha = 1.0
-        stopHomeButton.isEnabled = true
-        atHome = true
+
+    
+    @objc func stateChanged(dataCollectionSwitch: UISwitch) {
+        if dataCollectionSwitch.isOn {
+        
+            firstPing = true
+            locationManager?.startUpdatingLocation()
+            locationManager!.allowsBackgroundLocationUpdates = true
+            locationManager!.pausesLocationUpdatesAutomatically = false
+            trackingGif.isHidden = false
+            
+        }
+        else {
+             locationManager?.stopUpdatingLocation()
+          timeAtLocation = 0
+           prevLat = 0.0
+           prevLong = 0.0
+           prevMin = 0
+            trackingGif.isHidden = true
+            
+    
+        }
     }
-    // If stop is tapped, disable stop | enable start, and set atHome false.
-    @objc func tappedStopHome(){
-        startHomeButton.isEnabled = true
-        stopHomeButton.isEnabled = false
-        stopHomeButton.alpha = 0.5
-        startHomeButton.alpha = 1.0
-        atHome = false
-   }
+    
+    @objc func homeChanged(atHomeSwitch: UISwitch) {
+           if atHomeSwitch.isOn {
+                atHome = true
+                print(atHome)
+               
+           }
+           else {
+                atHome = false
+            print(atHome)
+           }
+       }
 
     // locations stores the locations retrieved, and the most recent addition (index 0) is the current location
     // location updates about every second
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations
+        locations: [CLLocation]) {
         // Create var location of type CLLocation, store current location in location
         var location: CLLocation
         location = locations[0]
@@ -220,6 +177,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             var locationLat = Double(round(10000*location.coordinate.latitude)/10000)
             let locationLong = Double(round(10000*location.coordinate.longitude)/10000)
             // If user pressed at home button
+            print(locationLat)
+            print(locationLong)
             if(atHome) {
                 // Get stored lat offset val and add it to the current location latitude
                 let latAdder = UserDefaults.standard.double(forKey: "latOffset")
