@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		34C55FC1247D8D86006722B1 /* Swift+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C55FC0247D8D86006722B1 /* Swift+Gif.swift */; };
+		34C55FC7247D9379006722B1 /* currentlyTracking.gif in Resources */ = {isa = PBXBuildFile; fileRef = 34C55FC6247D9379006722B1 /* currentlyTracking.gif */; };
 		34CE425D244F807900926D34 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 34CE425C244F807900926D34 /* logo.png */; };
 		EE2404B4244BC13800296022 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2404B3244BC13800296022 /* AppDelegate.swift */; };
 		EE2404B6244BC13800296022 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2404B5244BC13800296022 /* SceneDelegate.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		34C55FC0247D8D86006722B1 /* Swift+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+Gif.swift"; sourceTree = "<group>"; };
+		34C55FC6247D9379006722B1 /* currentlyTracking.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = currentlyTracking.gif; sourceTree = "<group>"; };
 		34CE425C244F807900926D34 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = SOURCE_ROOT; };
 		EE2404B0244BC13800296022 /* LocationBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE2404B3244BC13800296022 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -78,9 +82,11 @@
 				EE2404B3244BC13800296022 /* AppDelegate.swift */,
 				EE2404B5244BC13800296022 /* SceneDelegate.swift */,
 				EE2404B9244BC13800296022 /* Main.storyboard */,
+				34C55FC0247D8D86006722B1 /* Swift+Gif.swift */,
 				EE2404B7244BC13800296022 /* ViewController.swift */,
 				EE2404BE244BC13D00296022 /* LaunchScreen.storyboard */,
 				EE2404C1244BC13D00296022 /* Info.plist */,
+				34C55FC6247D9379006722B1 /* currentlyTracking.gif */,
 				34CE425C244F807900926D34 /* logo.png */,
 			);
 			path = LocationBase;
@@ -130,6 +136,9 @@
 		EE2404A8244BC13800296022 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					switch,
+				);
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Irfan Filipovic";
@@ -167,6 +176,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34C55FC7247D9379006722B1 /* currentlyTracking.gif in Resources */,
 				34CE425D244F807900926D34 /* logo.png in Resources */,
 				EE2404C0244BC13D00296022 /* LaunchScreen.storyboard in Resources */,
 				EE2404BB244BC13800296022 /* Main.storyboard in Resources */,
@@ -187,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34C55FC1247D8D86006722B1 /* Swift+Gif.swift in Sources */,
 				EE2404B8244BC13800296022 /* ViewController.swift in Sources */,
 				EE2404B4244BC13800296022 /* AppDelegate.swift in Sources */,
 				EE2404B6244BC13800296022 /* SceneDelegate.swift in Sources */,
@@ -351,6 +362,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8FT968SU8H;
 				INFOPLIST_FILE = LocationBase/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -369,6 +381,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 8FT968SU8H;
 				INFOPLIST_FILE = LocationBase/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
