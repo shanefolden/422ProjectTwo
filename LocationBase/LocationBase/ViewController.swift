@@ -6,7 +6,7 @@
 //  Modified by Irfan Filipovic, Shane Folden, Siqi Wang
 
 //  Last modified by: SF
-//  Last modified on: 04/26/20
+//  Last modified on: 05/28/20
 
 //  Following code operates tracking location and posting to the database.
 //  Implements button functionality and timed updates, can be changed to update at any interval
@@ -28,8 +28,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var trackLabel: UILabel!
     
-
-    
+ 
+  
+  
     //    2. A Location Manager which uses Apple's standard location services
     var locationManager: CLLocationManager?
     //    3. Two formatters for posting data into the database, date and time.
@@ -62,7 +63,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         dataCollectionSwitch.addTarget(self, action: #selector(stateChanged), for: .valueChanged)
         atHomeSwitch.addTarget(self, action: #selector(homeChanged), for: .valueChanged)
         
-        
+  
         
      
         trackingGif.loadGif(name: "currentlyTracking")
@@ -148,7 +149,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             print(atHome)
            }
        }
-
+    
+  
+    
+    
     // locations stores the locations retrieved, and the most recent addition (index 0) is the current location
     // location updates about every second
     func locationManager(_ manager: CLLocationManager, didUpdateLocations
@@ -192,6 +196,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 if(secondPing) {
                     print(prevMin)
                     timeAtLocation += (5 - (prevMin % 5))
+                    secondPing = false
                 } else {
                     timeAtLocation += 5
                 }
