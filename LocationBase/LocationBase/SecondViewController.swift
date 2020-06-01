@@ -20,8 +20,12 @@ class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var picker: UIPickerView!
     
     @Published var coordinates = CLLocationCoordinate2D()
+    var latitude = -1
+    var longitude = -1
     
-   
+    
+    @IBOutlet weak var returnButton: UIButton!
+    
     
     @IBOutlet weak var searchResultsTableView: UITableView!
     var searchCompleter = MKLocalSearchCompleter()
@@ -50,6 +54,8 @@ class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         timeFormatter.dateFormat = "HH:mm:ss"
         
         submitButton.addTarget(self, action:#selector(self.tappedSubmit), for:.touchUpInside)
+        
+         returnButton.addTarget(self, action:#selector(self.tappedReturn), for:.touchUpInside)
         
         self.picker.delegate = self
         self.picker.dataSource = self
@@ -102,7 +108,15 @@ class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
         }
     }
-
+    
+    // Function that gets called when return to home page button s pressed
+     @objc func tappedReturn(){
+        //pops current view off stack which brings user back to main page
+        navigationController?.popViewController(animated: true)
+        //Animates Transition
+        dismiss(animated: true, completion: nil)
+        
+    }
     
     @objc func tappedSubmit(){
         if(addressForm==nil){
@@ -134,7 +148,7 @@ class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 //
 //                  }
 //               }
-       
+   
         
         let url = URL(string: "https://ix.cs.uoregon.edu/~masonj/422lineform.php")
                   // Create a URLRequest variable and give it address url, method of POST
@@ -161,6 +175,10 @@ class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerView
              }
          }
          dataTask.resume()
+        
+        //Returns you to main screen
+        navigationController?.popViewController(animated: true)
+        dismiss(animated: true, completion: nil)
         
        }
 
