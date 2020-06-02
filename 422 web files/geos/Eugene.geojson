@@ -1,0 +1,53 @@
+var geojson = {
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Identity": "BBB96F48-DF3E-4D8E-8794-30F9057D64DB",
+        "Date": "2020-04-26"
+        "Time": "19:00:00"
+        "Time_at_Location": "0"
+      },
+      "geometry": {
+        "coordinates": [44.045771,-123.079289],
+        "type": "Point"
+      }
+    },
+
+
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "BOA",
+        "description": "money"
+      },
+      "geometry": {
+        "coordinates": [
+
+          -123.079937,44.045346
+        ],
+        "type": "Point"
+      }
+    },
+
+
+    {
+      "type": "Feature",
+      "properties": {
+        "title": "K14",
+        "description": "home"
+      },
+      "geometry": {
+        "coordinates": [
+
+          -123.078901,
+          44.044192
+        ],
+        "type": "Point"
+      }
+    }
+
+
+  ],
+  "type": "FeatureCollection"
+}
