@@ -17,16 +17,34 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        submitPassword.addTarget(self, action:#selector(self.tappedSubmit), for:.touchUpInside)
-        
-             backButton.addTarget(self, action:#selector(self.tappedReturn), for:.touchUpInside)
+       
         
         
 
         // Do any additional setup after loading the view.
     }
+    override func viewDidAppear(_ animated: Bool){
+        super.viewDidAppear(animated)
+        submitPassword.addTarget(self, action:#selector(self.tappedSubmit), for:.touchUpInside)
+               
+                    backButton.addTarget(self, action:#selector(self.tappedReturn), for:.touchUpInside)
+        
+    }
+  
     
-    @objc func tappedSubmit(){}
+    
+    @objc func tappedSubmit(){
+        if (passwordField.text == String(val))
+        {
+//          
+//            let next:DevModeViewController = DevModeViewController()
+//            
+//            self.present(next, animated: true, completion: nil)
+        }
+        else{
+            print("unsicko")
+        }
+    }
     @objc func tappedReturn(){}
     
 

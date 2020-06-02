@@ -12,6 +12,7 @@ class DevModeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("yeet")
 
         // Do any additional setup after loading the view.
     }

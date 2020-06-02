@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		34503A2224827C9100CE67A3 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34503A2124827C9100CE67A3 /* SecondViewController.swift */; };
-		34503A242483124100CE67A3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34503A232483124100CE67A3 /* SearchViewController.swift */; };
 		34C55FC1247D8D86006722B1 /* Swift+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C55FC0247D8D86006722B1 /* Swift+Gif.swift */; };
 		34C55FC7247D9379006722B1 /* currentlyTracking.gif in Resources */ = {isa = PBXBuildFile; fileRef = 34C55FC6247D9379006722B1 /* currentlyTracking.gif */; };
 		34CE425D244F807900926D34 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 34CE425C244F807900926D34 /* logo.png */; };
+		34E72E212485F5AA00A6737C /* DevModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E72E202485F5AA00A6737C /* DevModeViewController.swift */; };
+		34E72E262485F6F200A6737C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E72E252485F6F200A6737C /* LoginViewController.swift */; };
 		EE2404B4244BC13800296022 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2404B3244BC13800296022 /* AppDelegate.swift */; };
 		EE2404B6244BC13800296022 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2404B5244BC13800296022 /* SceneDelegate.swift */; };
 		EE2404B8244BC13800296022 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE2404B7244BC13800296022 /* ViewController.swift */; };
@@ -31,11 +32,12 @@
 
 /* Begin PBXFileReference section */
 		34503A2124827C9100CE67A3 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		34503A232483124100CE67A3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		34C55FC0247D8D86006722B1 /* Swift+Gif.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Swift+Gif.swift"; sourceTree = "<group>"; };
 		34C55FC6247D9379006722B1 /* currentlyTracking.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = currentlyTracking.gif; sourceTree = "<group>"; };
 		34CE425C244F807900926D34 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = SOURCE_ROOT; };
-		34E72E192485AF7200A6737C /* LocationBase-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LocationBase-Bridging-Header.h"; sourceTree = "<group>"; };
+		34E72E202485F5AA00A6737C /* DevModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevModeViewController.swift; sourceTree = "<group>"; };
+		34E72E222485F63800A6737C /* LocationBase-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LocationBase-Bridging-Header.h"; sourceTree = "<group>"; };
+		34E72E252485F6F200A6737C /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EE2404B0244BC13800296022 /* LocationBase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocationBase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE2404B3244BC13800296022 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE2404B5244BC13800296022 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,15 +89,16 @@
 				EE2404B3244BC13800296022 /* AppDelegate.swift */,
 				EE2404B5244BC13800296022 /* SceneDelegate.swift */,
 				EE2404B9244BC13800296022 /* Main.storyboard */,
-				34503A232483124100CE67A3 /* SearchViewController.swift */,
+				34E72E202485F5AA00A6737C /* DevModeViewController.swift */,
 				34503A2124827C9100CE67A3 /* SecondViewController.swift */,
 				34C55FC0247D8D86006722B1 /* Swift+Gif.swift */,
+				34E72E222485F63800A6737C /* LocationBase-Bridging-Header.h */,
 				EE2404B7244BC13800296022 /* ViewController.swift */,
 				EE2404BE244BC13D00296022 /* LaunchScreen.storyboard */,
 				EE2404C1244BC13D00296022 /* Info.plist */,
 				34C55FC6247D9379006722B1 /* currentlyTracking.gif */,
 				34CE425C244F807900926D34 /* logo.png */,
-				34E72E192485AF7200A6737C /* LocationBase-Bridging-Header.h */,
+				34E72E252485F6F200A6737C /* LoginViewController.swift */,
 			);
 			path = LocationBase;
 			sourceTree = "<group>";
@@ -206,7 +209,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34503A242483124100CE67A3 /* SearchViewController.swift in Sources */,
+				34E72E262485F6F200A6737C /* LoginViewController.swift in Sources */,
+				34E72E212485F5AA00A6737C /* DevModeViewController.swift in Sources */,
 				34C55FC1247D8D86006722B1 /* Swift+Gif.swift in Sources */,
 				EE2404B8244BC13800296022 /* ViewController.swift in Sources */,
 				EE2404B4244BC13800296022 /* AppDelegate.swift in Sources */,
