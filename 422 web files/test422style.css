@@ -1,0 +1,33 @@
+/*
+ * GROUP 5 - PROJECT 2 422map.html CSS
+ * THIS PAGE ASSIGNS A FEW CSS ATTRIBUTES
+ * Created: 4/XX/20
+ * Last Modified: 6/1/20
+ * Authors: Mason Jones (MJ)
+ */
+body {
+        background-color: #248232;
+        margin: 0px;
+        font-family: 'Lato', sans-serif;
+}
+
+.main_body {
+        background-color: #C7D59F;
+        margin: 0px;
+}
+
+.marker {
+        position: absolute !important;
+        z-index: 2;
+}
+
+.business {
+        position: absolute !important;
+        z-index: 1;
+}
+
+#map {
+        position: absolute !important;
+        height: 800px;
+        width: 100%;
+}
