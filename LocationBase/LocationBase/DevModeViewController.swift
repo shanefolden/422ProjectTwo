@@ -16,7 +16,9 @@ class DevModeViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mainView: UIButton!
     @IBOutlet weak var latitudeVal: UITextField!
     @IBOutlet weak var longitudeVal: UITextField!
-    
+    @IBOutlet weak var errorBox: UILabel!
+    var errorVal = ""
+    var testVal = "<!-- NEW COMMENT YO -->"
     var main:ViewController?
     
     let dateFormatter = DateFormatter()
@@ -47,7 +49,13 @@ class DevModeViewController: UIViewController, CLLocationManagerDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+          self.view.endEditing(true)
+          return false
+      }
+
     @objc func sendLocation() {
+        errorBox.text = ""
         // POST Setup
         // Create URLString to database upload page
         let url = URL(string: "https://ix.cs.uoregon.edu/~masonj/422backend.php")
@@ -67,18 +75,36 @@ class DevModeViewController: UIViewController, CLLocationManagerDelegate {
         let postData = "userId=\(UIDevice.current.identifierForVendor?.uuidString ?? "001")&tDate=\(currentDate)&tTime=\(currentTime)&tLatitude=\(locationLat ?? 37.0000)&tLongitude=\(locationLong ?? 122.0000)&tTimeAtLocation=\(0)"
         print(postData)
         // Insert the data string into the request body data
-            request.httpBody = postData.data(using: String.Encoding.utf8)
-             // Start a session which transmits our data through a shared.dataTask()
-            let dataTask = URLSession.shared.dataTask(with: request) { data,response,error in
-                if let error = error {
-                    print("Error occured \(error)")
-                    return
-                 }
-                if let data = data, let e = String(data: data, encoding: .utf8) {
-                    print("Reponse data string:\n\(e)")
+        request.httpBody = postData.data(using: String.Encoding.utf8)
+        // Start a session which transmits our data through a shared.dataTask()
+        let dataTask = URLSession.shared.dataTask(with: request) { data,response,error in
+            if error != nil {
+                let alert = UIAlertController(title: "Invalid Input", message: "Data was not sent correctly.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                return
+             }
+            if let data = data, let e = String(data: data, encoding: .utf8) {
+                let string = e.prefix(23)
+                if(String(string) != self.testVal) {
+                    self.errorVal = "Error Sending Data!"
+                } else {
+                    self.errorVal = "Success"
                 }
             }
-            dataTask.resume()
+        }
+        dataTask.resume()
+        while(errorVal == "") {
+            //wait
+        }
+        let alert = UIAlertController(title: "Response", message: errorVal, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+            }))
+        self.present(alert, animated: true, completion: nil)
+        errorVal = ""
     }
 }
 
