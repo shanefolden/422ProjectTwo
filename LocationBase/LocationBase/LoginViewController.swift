@@ -31,21 +31,30 @@ class LoginViewController: UIViewController {
         
     }
   
+    func switchScreen() {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        if let viewController = mainStoryboard.instantiateViewController(withIdentifier: "DevModeViewController") as? UIViewController {
+            self.present(viewController, animated: true, completion: nil)
+        }
+    }
     
     
     @objc func tappedSubmit(){
         if (passwordField.text == String(val))
         {
-//          
-//            let next:DevModeViewController = DevModeViewController()
-//            
-//            self.present(next, animated: true, completion: nil)
+            
+          switchScreen()
         }
         else{
             print("unsicko")
         }
     }
-    @objc func tappedReturn(){}
+   @objc func tappedReturn(){
+        //pops current view off stack which brings user back to main page
+        navigationController?.popViewController(animated: true)
+        //Animates Transition
+        dismiss(animated: true, completion: nil)
+    }
     
 
     /*
