@@ -35,6 +35,11 @@ class LoginViewController: UIViewController {
          backButton.backgroundColor = UIColor.white
          backButton.setTitleColor(.black, for: .normal)
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+           self.view.endEditing(true)
+           return false
+       }
   
     func switchScreen() {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
