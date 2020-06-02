@@ -28,7 +28,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var trackLabel: UILabel!
     
- 
+    @IBOutlet weak var lineButton: UIButton!
+    
+    
+    @IBOutlet weak var devButton: UIButton!
+    
   
   
     //    2. A Location Manager which uses Apple's standard location services
@@ -62,6 +66,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // Initalize method for data collection switch to call
         dataCollectionSwitch.addTarget(self, action: #selector(stateChanged), for: .valueChanged)
         atHomeSwitch.addTarget(self, action: #selector(homeChanged), for: .valueChanged)
+        lineButton.layer.borderWidth = 1
+        lineButton.layer.borderColor = UIColor.black.cgColor
+        lineButton.layer.cornerRadius = 5
+        lineButton.backgroundColor = UIColor.white
+        lineButton.setTitleColor(.black, for: .normal)
+        
+        devButton.layer.borderWidth = 1
+             devButton.layer.borderColor = UIColor.black.cgColor
+             devButton.layer.cornerRadius = 5
+        devButton.backgroundColor = UIColor.white
+        devButton.setTitleColor(.black, for: .normal)
+        
+             
         
   
         

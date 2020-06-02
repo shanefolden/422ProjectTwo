@@ -42,7 +42,6 @@ class LoginViewController: UIViewController {
     @objc func tappedSubmit(){
         if (passwordField.text == String(val))
         {
-            
           switchScreen()
         }
         else{
