@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<!--
+GROUP 5 - PROJECT 2 MAP HOSTING PAGE
+THIS PAGE IS A HOST FOR THE MAPBOX MAP - IT IS USED IN AN IFRAME CALL ON THE MAIN PAGE, 422Project1.html
+Created: 4/24/20
+Last Modified: 6/1/20
+Authors: Mason Jones (MJ), Man Him Fung (MF), Siqi Wang (SW)
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.js'></script>
+<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.1/mapbox-gl.css' rel='stylesheet'/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <script type="text/javascript">
+                function uploadGJ() {
+                        //This is for the USER markers
+                        var xhttp = new XMLHttpRequest();
+                        //Open the results.json file
+                        xhttp.open("POST", "results.json", false);
+                        xhttp.onload = function() {
+                                if (xhttp.status == 200) {
+                                        //if the file loads, put the contents in the json_area div
+                                        document.getElementById('json_area').innerHTML = xhttp.responseText;
+                                        //console.log(xhttp.responseText);
+                                }
+                        };
+
+                        /*      PROJ2 ADDITION  */
+                        //This is for the BUSINESS markers
+                        xhttp2 = new XMLHttpRequest();
+                        //Open the business.json file
+                        xhttp2.open("POST", "business.json", false);
+                        xhttp2.onload = function() {
+                                if (xhttp2.status == 200) {
+                                        //if the business file loads, put the contents in the business_area div
+                                        document.getElementById('business_area').innerHTML = xhttp2.responseText;
+                                        //console.log(xhttp2.responseText);
+                                }
+                        };
+                        //Send BOTH sets of markers to their html divs
+                        xhttp.send();
+                        xhttp2.send();
+                }
+        </script>
+
+        <title>Group 5 - CIS 422 Project 2 Map</title>
+        <link href="test422style.css" rel="stylesheet"/>
+</head>
+
+<!--BODY STARTS HERE-->
+<body>
+        <!--THIS IS WHERE BUSINESS INFORMATION FOR A QUERY IS PLACED-->
+        <div id="b_info" style="display:none;"></div>
+
+        <!--THIS IS WHERE MARKER DATA GOES-->
+        <div id="json_area" style="display:none;"></div>
+        <!--THIS IS WHERE BUSINESS MARKER DATA GOES-->
+        <div id="business_area" style="display:none;"></div>
+
+        <!--THIS IS THE ACTUAL MAP-->
+        <div id='map' class='mapboxgl-map'></div>
+
+        <!-- INIT MAP -->
+        <script async type="text/javascript">
+        mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uZXNtMCIsImEiOiJjazlldHBxaWUwNjE5M2Vub2d3czA0MnFyIn0.8p_wa6e2LPsQMG6MdKv61Q'
+        var map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/jonesm0/ck9ety752067t1ipbe57x31lm'
+        });
+
+        /*      TAKE DATA FROM FILES, PLACE THEM INTO THEIR CORRECT DIVS ON THIS HTML PAGE      */
+        uploadGJ();
+
+        var geojson = document.getElementById('json_area').innerHTML;
+        var businessjson = document.getElementById('business_area').innerHTML;
+
+        var newnew = JSON.parse(geojson);
+        var new_business = JSON.parse(businessjson);
+
+
+
+        /*      THIS IS WHERE USER MARKERS ARE ADDED TO THE MAP         */
+        newnew.features.forEach(function(marker) {
+                var uno = document.createElement('div');
+                        uno.className = 'marker';
+                        uno.style.backgroundImage = 'url(https://ix.cs.uoregon.edu/~masonj/geos/blip_duck_mini.png)';
+                        uno.style.width = '35px';
+                        uno.style.height = '35px';
+
+                //Use new div as base for new Marker
+                new mapboxgl.Marker(uno)
+                                .setLngLat(marker.geometry.coordinates)
+                        .setPopup(new mapboxgl.Popup({offset:25}).setHTML('<h3>ID: ' + marker.properties.Identity + '</h3><p>Date: ' + marker.properties.Date + '</p><p>Time: ' + marker.properties.Time + '</p><p>Time at Location: ' + marker.properties.Time_at_Location + '</p>'))
+                                //.setPitchAlignment('map')
+                                //.setRotationAlignment('map')
+                                .addTo(map);
+        });
+
+
+
+        /*      THIS IS WHERE BUSINESS MARKERS ARE ADDED TO THE MAP     */
+        new_business.features.forEach(function(business) {
+                var b = document.createElement('div'); //new business div
+                        b.className = 'business';
+                        b.style.backgroundImage = 'url(https://ix.cs.uoregon.edu/~masonj/geos/business_marker.png)';
+                        b.style.width = '40px';
+                        b.style.height = '40px';
+                        b.style.data = business.properties.Address;
+
+                        //Use new div as base for new Marker
+                        new mapboxgl.Marker(b)
+                                .setLngLat(business.geometry.coordinates)
+                        .setPopup(new mapboxgl.Popup({offset:25}).setHTML('<h3 id="bus_name">Name: ' + business.properties.Name + '</h3><p id="bus_addr">Address: ' + business.properties.Address + '</p><p id="bus_pop">People currently here: ' + business.properties.People + '</p><p id="bus_avg">Average time spent in store: ' + business.properties.Average_Time + '</p><p id="line_time">Average time spent in line: ' + business.properties.Line_Time + '</p>'))
+                                .addTo(map);
+        });
+
+
+
+        /*      THIS IS ME TRYING TO SCALE EACH MARKER ON PAGE ZOOM - CURRENTLY ADJUSTING HEIGHT/WIDTH --> A BAD FIX    */
+        var container = document.getElementsByClassName("mapboxgl-canvas-container");
+        var markers = container[0].getElementsByClassName("marker");
+        var bus_s = container[0].getElementsByClassName("business");
+
+        map.on('zoomend', function(){
+                var curr_zoom = map.getZoom();
+                curr_zoom = curr_zoom/18;
+                curr_zoom = curr_zoom.toFixed(2);
+
+                //Scale user markers
+                for(var i=0; i<markers.length; i++){
+                        markers[i].style.height = (35 * curr_zoom) + 'px';
+                        markers[i].style.width = (35 * curr_zoom) + 'px';
+                }
+                //Scale business markers
+                for(var j=0; j < bus_s.length; j++){
+                        bus_s[j].style.height = (40 * curr_zoom) + 'px';
+                        bus_s[j].style.width = (40 * curr_zoom) + 'px';
+                }
+        });
+
+        /*      WHEN YOU CLICK A BUSINESS, SEND ITS ADDRESS TO THE 422business.php PAGE IN ORDER TO COMPLETE ITS QUERIES        */
+        $('.business').on('click', function () {
+                var b_addr = this.style.data;
+                //console.log(b_addr);
+                let info = document.getElementById('b_info');
+                info.innerHTML = b_addr;
+
+                //POST form, passing business address in json format
+                $.ajax({
+                        type : "POST",
+                        url  : "422business.php",
+                        data : {b_addr: b_addr},
+                        success: function(data){
+                                console.log("sent " + data); //will output entire 422business.php page with address included in queries if successful
+                        }
+                });
+        });
+
+        </script>
+</body>
+</html>
