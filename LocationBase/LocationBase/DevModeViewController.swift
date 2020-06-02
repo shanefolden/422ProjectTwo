@@ -36,8 +36,8 @@ class DevModeViewController: UIViewController, CLLocationManagerDelegate {
         mainView.addTarget(self, action:#selector(self.goHome), for:.touchUpInside)
     }
     @objc func submitTime() {
-        let time: Int? = Int(timeInterval.text!)
-        main?.timeInterval = time ?? 5
+        let interval = timeInterval.text
+        UserDefaults.standard.set(interval, forKey: "frequency")
     }
     @objc func goHome() {
         //pops current view off stack which brings user back to main page
