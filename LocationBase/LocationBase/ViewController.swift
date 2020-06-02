@@ -33,6 +33,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var devButton: UIButton!
     
+    var errorVal = ""
+    var testVal = "<!-- NEW COMMENT YO -->"
   
   
     //    2. A Location Manager which uses Apple's standard location services
@@ -249,11 +251,27 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     print("Error occured \(error)")
                     return
                 }
-                if let data = data, let _ = String(data: data, encoding: .utf8) {
-                    //print("Reponse data string:\n\(_)")
+                if let data = data, let e = String(data: data, encoding: .utf8) {
+                    let string = e.prefix(23)
+                    if(String(string) != self.testVal) {
+                        self.errorVal = "Error Sending Data!"
+                    } else {
+                        self.errorVal = "Success"
+                    }
                 }
             }
             dataTask.resume()
+            while(errorVal == "") {
+                //wait
+            }
+            if(errorVal != "Success") {
+                let alert = UIAlertController(title: "Response", message: errorVal, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+            errorVal = ""
         }
     }
 /* *** for testing purposes and furthur implementation *** */
