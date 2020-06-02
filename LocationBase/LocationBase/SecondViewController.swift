@@ -12,60 +12,60 @@ import UserNotifications
 import MapKit
 
 class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, MKLocalSearchCompleterDelegate, UITextFieldDelegate  {
-     let pickerData = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120]
+     
+    // Selectable data for minute Picker
+    let pickerData = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120]
+    // Button to submit form
     @IBOutlet weak var submitButton: UIButton!
-    
+    //Text field to enter the address
     @IBOutlet weak var addressForm: UITextField!
-    
+    //Variable for the minute selecter in line time form
     @IBOutlet weak var picker: UIPickerView!
-    
-    @Published var coordinates = CLLocationCoordinate2D()
-    var latitude = -1
-    var longitude = -1
-    
-    
+    //Button that returns user to home screen
     @IBOutlet weak var returnButton: UIButton!
     
     
-    @IBOutlet weak var searchResultsTableView: UITableView!
-    var searchCompleter = MKLocalSearchCompleter()
-    var searchResults = [MKLocalSearchCompletion]()
+    //Objects that format date before it is send to database
     let dateFormatter = DateFormatter()
-     let timeFormatter = DateFormatter()
+    let timeFormatter = DateFormatter()
+    //Initialize amount of minutes
     var minutes = -1
     
-    
+    // Function that initializes the amount of objects in the minute picker
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+    //Function that initializes the amount of rows in the minute picker
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerData.count
     }
+    //Function that closes the ios keyboard when the enter key is pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
-    
+    //Function that does initial set up before loading the view
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchCompleter.delegate = self
+        //Initialize date format
         dateFormatter.dateFormat = "yyyy-MM-dd"
         // Time Formatting
         timeFormatter.dateStyle = .none
         timeFormatter.dateFormat = "HH:mm:ss"
+        //Initialize address textField with a place holder
         self.addressForm.delegate = self
         addressForm.placeholder = "Business Address"
         
+        // Create a target function called when submit button is pressed
         submitButton.addTarget(self, action:#selector(self.tappedSubmit), for:.touchUpInside)
-        
+         // Create a target function called when return button is pressed
          returnButton.addTarget(self, action:#selector(self.tappedReturn), for:.touchUpInside)
         
+        //Initialize minute picker with the correct data source
         self.picker.delegate = self
         self.picker.dataSource = self
-       
 
-        // Do any additional setup after loading the view.
+      
     }
     
    
@@ -80,6 +80,7 @@ class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         return String(pickerData[row])
     }
     
+    //Alert function if address is invalid
     func addressAlert(){
         let alert = UIAlertController(title: "Invalid Input", message: "Please enter a valid address.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
@@ -88,6 +89,7 @@ class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             self.present(alert, animated: true, completion: nil)
     }
     
+    //Success Alert if data has been posted successfully
     func successAlert(){
         let alert = UIAlertController(title: "Success", message: "Line data sent successfully.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
@@ -96,70 +98,41 @@ class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             self.present(alert, animated: true, completion: nil)
     }
     
-  func getCoordinate( addressString : String,
-            completionHandler: @escaping(CLLocationCoordinate2D, NSError?) -> Void ) {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(addressString) { (placemarks, error) in
-            if error == nil {
-                if let placemark = placemarks?[0] {
-                    let location = placemark.location!
-                    completionHandler(location.coordinate, nil)
-                    
-                    return
-                }
-            }
-                
-            completionHandler(kCLLocationCoordinate2DInvalid, error as NSError?)
-        }
-    }
+  
     
-    // Function that gets called when return to home page button s pressed
+    // Function that gets called when return to home page button is pressed
      @objc func tappedReturn(){
         //pops current view off stack which brings user back to main page
         navigationController?.popViewController(animated: true)
         //Animates Transition
         dismiss(animated: true, completion: nil)
-        
     }
     
+    //Function that gets called when submit button is pressed
+    
     @objc func tappedSubmit(){
+        //Confirm addressForm is filled out
         if(addressForm==nil){
             //addressAlert()
             return
         }
+        //Assign address to text from address Form
         guard let address = addressForm.text else {
             return
         }
-        if (address.count==0){
-            //addressAlert()
-            return
-        }
-        
-        
+        //get current date to send with form
         let date = Date()
+        //format date with previously declared date/time formatters
         let currentDate = dateFormatter.string(from: date)
         // Retrieve time
-       let currentTime = timeFormatter.string(from: date)
-        print(currentDate)
-        print(currentTime)
-        print(address)
-        print(minutes)
-//         getCoordinate(addressString: address) { (responseCoordinate, error) in
-//                    if error == nil {
-//                       self.coordinates = responseCoordinate
-//                        let latitude = self.coordinates.latitude
-//                        let longitude = self.coordinates.longitude
-//
-//                  }
-//               }
-   
-        
+        let currentTime = timeFormatter.string(from: date)
+        //declare url user is posting to
         let url = URL(string: "https://ix.cs.uoregon.edu/~masonj/422lineform.php")
                   // Create a URLRequest variable and give it address url, method of POST
           var request : URLRequest = URLRequest(url: url!)
           request.httpMethod = "POST"
         
-         // Create string that contains UIDevice ID which is unique for each device, and insert vars generated above
+         //Create post data with address, minutes, date and time
          let postData = "l_addr=\(address)&l_wait=\(minutes)&l_date=\(currentDate)&l_time=\(currentTime)"
          print(postData)
          // Insert the data string into the request body data
@@ -172,10 +145,9 @@ class SecondViewController: UIViewController, UIPickerViewDelegate, UIPickerView
              }
              else{
                 //self.successAlert()
-                print("fine")
             }
-             if let data = data, let text = String(data: data, encoding: .utf8) {
-                 print(text)
+             if let data = data, let _ = String(data: data, encoding: .utf8) {
+                 //print(text)
              }
          }
          dataTask.resume()
