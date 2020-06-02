@@ -286,11 +286,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="icH-o9-RpF">
+                                <rect key="frame" x="183" y="248" width="49" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Submit"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="YIZ-tz-1yD"/>
                     </view>
                     <navigationItem key="navigationItem" id="7P2-zo-4T1"/>
+                    <connections>
+                        <outlet property="submitInterval" destination="icH-o9-RpF" id="Uxv-F9-xKu"/>
+                        <outlet property="timeInterval" destination="8fC-Pd-Vin" id="ECR-WK-fVy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ec2-hv-XII" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
