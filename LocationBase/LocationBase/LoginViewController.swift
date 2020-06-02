@@ -13,22 +13,27 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var submitPassword: UIButton!
-    let val = 314
+    let val = "password"
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       
-        
-        
 
-        // Do any additional setup after loading the view.
     }
+    
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
         submitPassword.addTarget(self, action:#selector(self.tappedSubmit), for:.touchUpInside)
+        submitPassword.layer.borderWidth = 1
+        submitPassword.layer.borderColor = UIColor.black.cgColor
+        submitPassword.layer.cornerRadius = 5
+        submitPassword.backgroundColor = UIColor.white
+        submitPassword.setTitleColor(.black, for: .normal)
                
-                    backButton.addTarget(self, action:#selector(self.tappedReturn), for:.touchUpInside)
-        
+        backButton.addTarget(self, action:#selector(self.tappedReturn), for:.touchUpInside)
+        backButton.layer.borderWidth = 1
+         backButton.layer.borderColor = UIColor.black.cgColor
+         backButton.layer.cornerRadius = 5
+         backButton.backgroundColor = UIColor.white
+         backButton.setTitleColor(.black, for: .normal)
     }
   
     func switchScreen() {
