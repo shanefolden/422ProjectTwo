@@ -58,7 +58,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var timeAtLocation = 0
     var sameLocationCheck = 0.00035
     
-    var timeInterval = 5
 
     //    10. Implement own functions on view load
     override func viewDidLoad() {
@@ -99,6 +98,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             }
             // Adds latOffset to constant user values that way it doesnt change if the user quits the app
             UserDefaults.standard.set(randomLat, forKey: "latOffset")
+            UserDefaults.standard.set(5, forKey: "frequency")
             // Set switches to off state
             dataCollectionSwitch.setOn(false, animated:false)
             atHomeSwitch.setOn(false, animated:false)
@@ -179,6 +179,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         // Get minutes and seconds
         let minCheck = Int(minFormatter.string(from: location.timestamp))
         let secCheck = Int(secFormatter.string(from: location.timestamp))
+        let timeInterval = UserDefaults.standard.integer(forKey: "frequency")
         // If the minutes is a multiple of 5 and it is the first second of that minute
         // Post data, else do nothing
         if(((minCheck! % timeInterval == 0) && (secCheck! == 00)) || firstPing) {
