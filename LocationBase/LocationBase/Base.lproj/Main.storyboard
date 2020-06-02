@@ -291,12 +291,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Submit"/>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyh-PC-sPK">
+                                <rect key="frame" x="106" y="596" width="202" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Back to Main Menu"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="YIZ-tz-1yD"/>
                     </view>
                     <navigationItem key="navigationItem" id="7P2-zo-4T1"/>
                     <connections>
+                        <outlet property="sendCurrent" destination="DqT-YW-BQf" id="UL6-lU-pUN"/>
                         <outlet property="submitInterval" destination="icH-o9-RpF" id="Uxv-F9-xKu"/>
                         <outlet property="timeInterval" destination="8fC-Pd-Vin" id="ECR-WK-fVy"/>
                     </connections>
