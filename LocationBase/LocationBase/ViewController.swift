@@ -57,6 +57,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     //    9. time at location variable and range for location (.025 miles)
     var timeAtLocation = 0
     var sameLocationCheck = 0.00035
+    
+    var timeInterval = 5
 
     //    10. Implement own functions on view load
     override func viewDidLoad() {
@@ -167,9 +169,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
            }
        }
     
-  
-    
-    
     // locations stores the locations retrieved, and the most recent addition (index 0) is the current location
     // location updates about every second
     func locationManager(_ manager: CLLocationManager, didUpdateLocations
@@ -182,7 +181,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         let secCheck = Int(secFormatter.string(from: location.timestamp))
         // If the minutes is a multiple of 5 and it is the first second of that minute
         // Post data, else do nothing
-        if(((minCheck! % 5 == 0) && (secCheck! == 00)) || firstPing) {
+        if(((minCheck! % timeInterval == 0) && (secCheck! == 00)) || firstPing) {
             print(firstPing)
             print(secondPing)
             print(prevMin)
@@ -212,10 +211,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 // else add 5 minutes
                 if(secondPing) {
                     print(prevMin)
-                    timeAtLocation += (5 - (prevMin % 5))
+                    timeAtLocation += (timeInterval - (prevMin % 5))
                     secondPing = false
                 } else {
-                    timeAtLocation += 5
+                    timeAtLocation += timeInterval
                 }
             } else {
                 // If firstPing set secondPing and minute, else set time to 0
