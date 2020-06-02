@@ -113,7 +113,7 @@ Authors: Mason Jones (MJ), Man Him Fung (MF), Siqi Wang (SW)
                         //Use new div as base for new Marker
                         new mapboxgl.Marker(b)
                                 .setLngLat(business.geometry.coordinates)
-                        .setPopup(new mapboxgl.Popup({offset:25}).setHTML('<h3 id="bus_name">Name: ' + business.properties.Name + '</h3><p id="bus_addr">Address: ' + business.properties.Address + '</p><p id="bus_pop">People currently here: ' + business.properties.People + '</p><p id="bus_avg">Average time spent in store: ' + business.properties.Average_Time + '</p><p id="line_time">Average time spent in line: ' + business.properties.Line_Time + '</p>'))
+                        .setPopup(new mapboxgl.Popup({offset:25}).setHTML('<h3 id="bus_name">Name: ' + business.properties.Name + '</h3><p id="bus_addr">Address: ' + business.properties.Address + '</p><p id="bus_pop">People currently here: ' + business.properties.People  + '</p><p id="bus_avg">Average time spent in store recently: ' + business.properties.Average_Time + '</p><p id="line_time">Average time spent in line: ' + business.properties.Line_Time + '</p><p id="bus_foot">People usually here at this time: ' + business.properties.Avg_Pop + '</p>'))
                                 .addTo(map);
         });
 

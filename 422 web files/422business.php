@@ -127,10 +127,20 @@ $result3 = $conn->query($query3);
 print "<pre>\n";
 while($row = $result3->fetch_assoc())
 {
+        $avg_pop = $row[ave_foot];
         print "There are typically this many users here at this time: $row[ave_foot]\n";
 }
 print "</pre>\n";
 mysqli_free_result($result3);
+
+/*      UPDATE BUSINESS' AVERAGE POPULATION      */
+$update4 = "UPDATE `CIS422_Project1`.`Business` SET `avg_pop` = '";
+$update4 = $update4.$avg_pop."' WHERE (`addr` = '";
+$update4 = $update4.$business."');";
+
+$res_upd4 = $conn->query($update4);
+
+mysqli_free_result($res_upd4);
 ?>
 
 <?php

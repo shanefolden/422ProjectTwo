@@ -5,7 +5,7 @@ include('connectionData.txt');
 $conn = mysqli_connect($server, $user, $pass, $dbname, $port)
 or die('Error connecting to MySQL server.');
 ?>
-
+<!-- NEW COMMENT YO -->
 <!--
 GROUP 5 - PROJECT 2 BACKEND PHP PAGE
 Created: 4/19/20
@@ -130,7 +130,8 @@ $dbdata2 = array();
                  \"Address\":\"$row[addr]\",
                  \"People\":\"$row[population]\",
                  \"Average_Time\":\"$row[avg_time]\",
-                 \"Line_Time\":\"$row[line_time]\"
+                 \"Line_Time\":\"$row[line_time]\",
+                 \"Avg_Pop\":\"$row[avg_pop]\"
          }}," );
   }
 
